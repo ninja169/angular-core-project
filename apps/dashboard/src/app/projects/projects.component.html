@@ -1,0 +1,57 @@
+<div class="container">
+  <!-- PROJECTS LIST -->
+  <div class="col-50">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h1>My Projects</h1>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item (click)="selectProject(project)"
+          *ngFor="let project of projects">
+            <h3 mat-line>
+              <!-- PROJECT DETAILS -->
+              {{ project.title }}
+            </h3>
+            <p mat-line>
+              <!-- PROJECT DETAILS -->
+              {{ project.details}}
+            </p>
+            <button mat-icon-button>
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!-- PROJECT DETAILS -->
+  <div class="col-50">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h1>
+            <!-- PROJECT TITLE HERE -->
+            <span *ngIf="selectedProject; else elseBlock">{{ selectedProject?.title}}</span>
+            <ng-template #elseBlock>Please select a Project</ng-template>
+            
+          </h1>
+        </mat-card-title>
+      </mat-card-header>
+      <form>
+        <mat-card-content>
+          <!-- PROJECT FORM HERE -->
+          <span *ngIf="selectedProject; else elseNoProject"><pre>{{ selectedProject | json }}</pre></span>
+            <ng-template #elseNoProject>Project has not been selected yet.</ng-template>
+          
+        </mat-card-content>
+        <mat-card-actions>
+          <button type="submit" mat-button color="primary">Save</button>
+          <button type="button" mat-button (click)="cancel()">Cancel</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </div>
+</div>
